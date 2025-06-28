@@ -1,70 +1,56 @@
-{
-  "id": "840166e4-8cba-4669-b6b8-73f71ae110ce",
-  "name": "korva blog (front end only)",
-  "description": "a full fledge blog web app design",
-  "tags": [
-    "React",
-    "TypeScript",
-    "Tailwind",
-    "Radix",
-    "Framer",
-    "Vite",
-    "PostCSS",
-    "Autoprefixer"
-  ],
-  "images": [
-    "https://i.ibb.co/XfnKqdP6/image.jpg",
-    "https://i.ibb.co/Zp19jLC9/image-1.jpg",
-    "https://i.ibb.co/vCXCQwHR/image-2.jpg",
-    "https://i.ibb.co/dYc1TFL/image-3.jpg",
-    "https://i.ibb.co/Wv1BpGF1/image-4.jpg",
-    "https://i.ibb.co/B5ymjZ9z/image-5.jpg",
-    "https://i.ibb.co/ZpvvfHWp/image-6.jpg",
-    "https://i.ibb.co/rRMSqRfJ/image-7.jpg",
-    "https://i.ibb.co/T9WBkLy/image-8.jpg",
-    "https://i.ibb.co/wNnzyKm/image-9.jpg",
-    "https://i.ibb.co/xk9bNWk/image-10.jpg",
-    "https://i.ibb.co/20CwtTj/image-11.jpg",
-    "https://i.ibb.co/4ZRhrH1/image-12.jpg",
-    "https://i.ibb.co/F46yCH0/image-13.jpg",
-    "https://i.ibb.co/1tks8Rq/image-14.jpg"
-  ],
-  "videos": [
-    ""
-  ]
-},
-{
-  "id": "840166e4-8cba-4669-b6b8-73f71ae119ce",
-  "name": "korva blog (front end only)",
-  "description": "a full fledge blog web app design",
-  "tags": [
-    "React",
-    "TypeScript",
-    "Tailwind",
-    "Radix",
-    "Framer",
-    "Vite",
-    "PostCSS",
-    "Autoprefixer"
-  ],
-  "images": [
-    "https://i.ibb.co/XfnKqdP6/image.jpg",
-    "https://i.ibb.co/Zp19jLC9/image-1.jpg",
-    "https://i.ibb.co/vCXCQwHR/image-2.jpg",
-    "https://i.ibb.co/dYc1TFL/image-3.jpg",
-    "https://i.ibb.co/Wv1BpGF1/image-4.jpg",
-    "https://i.ibb.co/B5ymjZ9z/image-5.jpg",
-    "https://i.ibb.co/ZpvvfHWp/image-6.jpg",
-    "https://i.ibb.co/rRMSqRfJ/image-7.jpg",
-    "https://i.ibb.co/T9WBkLy/image-8.jpg",
-    "https://i.ibb.co/wNnzyKm/image-9.jpg",
-    "https://i.ibb.co/xk9bNWk/image-10.jpg",
-    "https://i.ibb.co/20CwtTj/image-11.jpg",
-    "https://i.ibb.co/4ZRhrH1/image-12.jpg",
-    "https://i.ibb.co/F46yCH0/image-13.jpg",
-    "https://i.ibb.co/1tks8Rq/image-14.jpg"
-  ],
-  "videos": [
-    ""
-  ]
-}
+[
+  {
+    "id": "840166e4-8cba-4669-b6b8-73f71ae110ce",
+    "name": "korva blog (front end only)",
+    "description": "a full fledge blog web app design",
+    "tags": [
+      "React",
+      "TypeScript",
+      "Tailwind",
+      "Radix",
+      "Framer",
+      "Vite",
+      "PostCSS",
+      "Autoprefixer"
+    ],
+    "images": [
+      "https://i.ibb.co/XfnKqdP6/image.jpg",
+      "https://i.ibb.co/Zp19jLC9/image-1.jpg",
+      "https://i.ibb.co/vCXCQwHR/image-2.jpg",
+      "https://i.ibb.co/dYc1TFL/image-3.jpg",
+      "https://i.ibb.co/Wv1BpGF1/image-4.jpg",
+      "https://i.ibb.co/B5ymjZ9z/image-5.jpg",
+      "https://i.ibb.co/ZpvvfHWp/image-6.jpg",
+      "https://i.ibb.co/rRMSqRfJ/image-7.jpg",
+      "https://i.ibb.co/T9WBkLy/image-8.jpg",
+      "https://i.ibb.co/wNnzyKm/image-9.jpg",
+      "https://i.ibb.co/xk9bNWk/image-10.jpg",
+      "https://i.ibb.co/20CwtTj/image-11.jpg",
+      "https://i.ibb.co/4ZRhrH1/image-12.jpg",
+      "https://i.ibb.co/F46yCH0/image-13.jpg",
+      "https://i.ibb.co/1tks8Rq/image-14.jpg"
+    ],
+    "videos": []
+  },
+  {
+    "id": "840166e4-8cba-4669-b6b8-73f71ae119ce",
+    "name": "korva portfolio website",
+    "description": "another full fledge project showcase",
+    "tags": [
+      "React",
+      "TypeScript",
+      "Tailwind",
+      "Radix",
+      "Framer",
+      "Vite",
+      "PostCSS",
+      "Autoprefixer"
+    ],
+    "images": [
+      "https://i.ibb.co/XfnKqdP6/image.jpg",
+      "https://i.ibb.co/Zp19jLC9/image-1.jpg",
+      "https://i.ibb.co/vCXCQwHR/image-2.jpg"
+    ],
+    "videos": []
+  }
+]
