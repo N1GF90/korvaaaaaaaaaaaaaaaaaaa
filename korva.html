@@ -1202,7 +1202,29 @@
         projectsGrid.classList.add('hidden');
 
         try {
-          const data = await response.json();
+          const response = await fetch('https://korva-pi.vercel.app/data.json');
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const rawText = await response.text();
+
+          // Try to fix malformed JSON by wrapping in array brackets if needed
+          let jsonText = rawText.trim();
+          if (!jsonText.startsWith('[') && !jsonText.startsWith('{')) {
+            throw new Error('Invalid JSON format');
+          }
+
+          // If it starts with { but doesn't start with [, it might be missing array brackets
+          if (jsonText.startsWith('{') && !jsonText.startsWith('[')) {
+            // Check if it contains multiple objects separated by commas
+            if (jsonText.includes('},{')) {
+              jsonText = '[' + jsonText + ']';
+            }
+          }
+
+          const data = JSON.parse(jsonText);
 
           // Hide loading state
           loadingState.classList.add('hidden');
@@ -1212,7 +1234,7 @@
           if (Array.isArray(data)) {
             projects = data;
           } else if (data && typeof data === 'object') {
-            projects = [data]; // Wrap single project in array
+            projects = [data];
           } else {
             projects = [];
           }
@@ -1231,55 +1253,54 @@
           loadingState.classList.add('hidden');
           errorState.classList.remove('hidden');
         }
-      }
 
-      showEmptyState() {
-        const errorState = document.getElementById('error-state');
-        if (errorState) {
-          errorState.classList.remove('hidden');
-          errorState.querySelector('h3').textContent = 'No Projects Found';
-          errorState.querySelector('p').textContent = 'We haven\'t added any projects yet. Check back soon!';
+        showEmptyState() {
+          const errorState = document.getElementById('error-state');
+          if (errorState) {
+            errorState.classList.remove('hidden');
+            errorState.querySelector('h3').textContent = 'No Projects Found';
+            errorState.querySelector('p').textContent = 'We haven\'t added any projects yet. Check back soon!';
+          }
         }
-      }
 
-      renderProjects(projects) {
-        const projectsGrid = document.getElementById('projects-grid');
-        if (!projectsGrid) return;
+        renderProjects(projects) {
+          const projectsGrid = document.getElementById('projects-grid');
+          if (!projectsGrid) return;
 
-        projectsGrid.innerHTML = '';
+          projectsGrid.innerHTML = '';
 
-        projects.forEach((project, index) => {
-          const projectCard = this.createProjectCard(project);
-          projectCard.style.animationDelay = `${index * 0.1}s`;
-          projectCard.classList.add('fade-in');
-          projectsGrid.appendChild(projectCard);
-        });
-      }
-
-      createProjectCard(project) {
-        const card = document.createElement('div');
-        card.className = 'project-card';
-
-        // Create media section with slideshow if images/videos exist
-        let mediaHtml = '';
-        const mediaItems = [];
-        if (Array.isArray(project.images)) {
-          project.images.forEach(url => {
-            if (url && url.trim()) {
-              mediaItems.push(`<img src="${url}" class="slide-media" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />`);
-            }
+          projects.forEach((project, index) => {
+            const projectCard = this.createProjectCard(project);
+            projectCard.style.animationDelay = `${index * 0.1}s`;
+            projectCard.classList.add('fade-in');
+            projectsGrid.appendChild(projectCard);
           });
         }
-        if (Array.isArray(project.videos)) {
-          project.videos.forEach(url => {
-            if (url && url.trim()) {
-              mediaItems.push(`<video src="${url}" class="slide-media" style="width:100%;height:100%;object-fit:cover;" controls></video>`);
-            }
-          });
-        }
-        if (mediaItems.length > 0) {
-          // Slideshow controls
-          mediaHtml = `
+
+        createProjectCard(project) {
+          const card = document.createElement('div');
+          card.className = 'project-card';
+
+          // Create media section with slideshow if images/videos exist
+          let mediaHtml = '';
+          const mediaItems = [];
+          if (Array.isArray(project.images)) {
+            project.images.forEach(url => {
+              if (url && url.trim()) {
+                mediaItems.push(`<img src="${url}" class="slide-media" style="width:100%;height:100%;object-fit:cover;" loading="lazy" />`);
+              }
+            });
+          }
+          if (Array.isArray(project.videos)) {
+            project.videos.forEach(url => {
+              if (url && url.trim()) {
+                mediaItems.push(`<video src="${url}" class="slide-media" style="width:100%;height:100%;object-fit:cover;" controls></video>`);
+              }
+            });
+          }
+          if (mediaItems.length > 0) {
+            // Slideshow controls
+            mediaHtml = `
                         <div class="project-media slideshow-container">
                             <div class="slide-wrapper">
                                 ${mediaItems.map((item, i) => `<div class="slide${i === 0 ? ' active' : ''}">${item}</div>`).join('')}
@@ -1288,22 +1309,22 @@
                             <button class="slide-btn next-btn" type="button" aria-label="Next">&#10095;</button>
                         </div>
                     `;
-        } else {
-          mediaHtml = `
+          } else {
+            mediaHtml = `
                         <div class="project-media">
                             <i class="fas fa-laptop-code" style="font-size: 3rem; color: white;"></i>
                         </div>
                     `;
-        }
+          }
 
-        // Create tags
-        const tagsHtml = project.tags && project.tags.length > 0 ?
-          `<div class="project-tags">
+          // Create tags
+          const tagsHtml = project.tags && project.tags.length > 0 ?
+            `<div class="project-tags">
                         ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>` : '';
 
-        // Create links
-        const linksHtml = `
+          // Create links
+          const linksHtml = `
                     <div class="project-links">
                         ${project.source_code ? `<a href="${project.source_code}" target="_blank" class="project-link">
                             <i class="fab fa-github"></i> Source Code
@@ -1314,7 +1335,7 @@
                     </div>
                 `;
 
-        card.innerHTML = `
+          card.innerHTML = `
                     ${mediaHtml}
                     <div class="project-content">
                         <h3 class="project-title">${project.name || 'Untitled Project'}</h3>
@@ -1324,59 +1345,59 @@
                     </div>
                 `;
 
-        // Add slideshow logic if needed
-        if (mediaItems.length > 0) {
-          setTimeout(() => {
-            const slideWrapper = card.querySelector('.slide-wrapper');
-            const slides = card.querySelectorAll('.slide');
-            const prevBtn = card.querySelector('.prev-btn');
-            const nextBtn = card.querySelector('.next-btn');
-            let currentSlide = 0;
-            function showSlide(idx) {
-              slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === idx);
+          // Add slideshow logic if needed
+          if (mediaItems.length > 0) {
+            setTimeout(() => {
+              const slideWrapper = card.querySelector('.slide-wrapper');
+              const slides = card.querySelectorAll('.slide');
+              const prevBtn = card.querySelector('.prev-btn');
+              const nextBtn = card.querySelector('.next-btn');
+              let currentSlide = 0;
+              function showSlide(idx) {
+                slides.forEach((slide, i) => {
+                  slide.classList.toggle('active', i === idx);
+                });
+              }
+              prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
               });
-            }
-            prevBtn.addEventListener('click', (e) => {
-              e.stopPropagation();
-              currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-              showSlide(currentSlide);
-            });
-            nextBtn.addEventListener('click', (e) => {
-              e.stopPropagation();
-              currentSlide = (currentSlide + 1) % slides.length;
-              showSlide(currentSlide);
-            });
-          }, 0);
+              nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+              });
+            }, 0);
+          }
+
+          return card;
         }
 
-        return card;
-      }
+        setupAnimations() {
+          // Intersection Observer for scroll animations
+          const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+          };
 
-      setupAnimations() {
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-          threshold: 0.1,
-          rootMargin: '0px 0px -50px 0px'
-        };
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+              }
+            });
+          }, observerOptions);
 
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('fade-in');
-            }
+          // Observe cards for animation
+          document.querySelectorAll('.service-card, .contact-card').forEach(card => {
+            observer.observe(card);
           });
-        }, observerOptions);
+        }
 
-        // Observe cards for animation
-        document.querySelectorAll('.service-card, .contact-card').forEach(card => {
-          observer.observe(card);
-        });
-      }
-
-      showToast(message, type = 'info') {
-        const toast = document.createElement('div');
-        toast.style.cssText = `
+        showToast(message, type = 'info') {
+          const toast = document.createElement('div');
+          toast.style.cssText = `
                     position: fixed;
                     top: 20px;
                     right: 20px;
@@ -1392,28 +1413,28 @@
                     transition: all 0.3s ease;
                     font-weight: 500;
                 `;
-        toast.textContent = message;
+          toast.textContent = message;
 
-        document.body.appendChild(toast);
+          document.body.appendChild(toast);
 
-        // Animate in
-        setTimeout(() => {
-          toast.style.opacity = '1';
-          toast.style.transform = 'translateX(0)';
-        }, 100);
-
-        // Remove after 3 seconds
-        setTimeout(() => {
-          toast.style.opacity = '0';
-          toast.style.transform = 'translateX(100%)';
+          // Animate in
           setTimeout(() => {
-            if (toast.parentNode) {
-              toast.parentNode.removeChild(toast);
-            }
-          }, 300);
-        }, 3000);
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(0)';
+          }, 100);
+
+          // Remove after 3 seconds
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+              if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+              }
+            }, 300);
+          }, 3000);
+        }
       }
-    }
 
     // Global functions for HTML onclick handlers
     function loadProjects() {
