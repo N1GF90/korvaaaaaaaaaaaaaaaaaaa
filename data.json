@@ -33,24 +33,35 @@
     "videos": []
   },
   {
-    "id": "840166e4-8cba-4669-b6b8-73f71ae119ce",
-    "name": "korva portfolio website",
-    "description": "another full fledge project showcase",
-    "tags": [
-      "React",
-      "TypeScript",
-      "Tailwind",
-      "Radix",
-      "Framer",
-      "Vite",
-      "PostCSS",
-      "Autoprefixer"
-    ],
-    "images": [
-      "https://raw.githubusercontent.com/N1GF90/korvaaaaaaaaaaaaaaaaaaa/refs/heads/main/image.jpg",
-      "https://raw.githubusercontent.com/N1GF90/korvaaaaaaaaaaaaaaaaaaa/refs/heads/main/image%20(1).jpg",
-      "https://raw.githubusercontent.com/N1GF90/korvaaaaaaaaaaaaaaaaaaa/refs/heads/main/image%20(2).jpg"
-    ],
-    "videos": []
-  }
+  "id": "840166e4-8cba-4669-b6b8-73f71ae119ce",
+  "name": "korva survey (front end only)",
+  "description": "simple front end for a survey web app",
+  "tags": [
+    "React",
+    "TypeScript",
+    "Tailwind",
+    "Radix",
+    "Framer",
+    "Vite",
+    "PostCSS",
+    "Autoprefixer",
+    "Framer Motion",
+    "Lucide React",
+    "shadcn",
+    "tailwind animate",
+    "google fonts"
+  ],
+  "images": [
+    "https://raw.githubusercontent.com/N1GF90/korvaaaaaaaaaaaaaaaaaaa/refs/heads/main/image.jpg",
+    "https://raw.githubusercontent.com/N1GF90/korvaaaaaaaaaaaaaaaaaaa/refs/heads/main/image%20(1).jpg",
+    "https://raw.githubusercontent.com/N1GF90/korvaaaaaaaaaaaaaaaaaaa/refs/heads/main/image%20(2).jpg",
+    "https://raw.githubusercontent.com/N1GF90/korvaaaaaaaaaaaaaaaaaaa/refs/heads/main/image.png",
+    "https://raw.githubusercontent.com/N1GF90/korvaaaaaaaaaaaaaaaaaaa/refs/heads/main/jih.png",
+    "https://raw.githubusercontent.com/N1GF90/korvaaaaaaaaaaaaaaaaaaa/refs/heads/main/khjghc.png",
+    "https://raw.githubusercontent.com/N1GF90/korvaaaaaaaaaaaaaaaaaaa/refs/heads/main/kojih.png",
+    "https://raw.githubusercontent.com/N1GF90/korvaaaaaaaaaaaaaaaaaaa/refs/heads/main/hu.png"
+  ],
+  "videos": []
+}
+
 ]
